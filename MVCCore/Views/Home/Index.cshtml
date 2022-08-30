@@ -1,0 +1,77 @@
+﻿@model MVCCore.Models.MasterBook
+
+@{
+    ViewData["Title"] = "Home Page";
+    int count = 0;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container">
+    <form asp-action="index" method="post">
+
+        <div class="row">
+            <div class="col-md-6">
+                <label asp-for="BookName">Book Name</label>
+                <input asp-for="BookName" class="form-control" />
+                <span asp-validation-for="BookName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="BookAuthor">Book Author</label>
+                <input asp-for="BookAuthor" class="form-control" />
+                <span asp-validation-for="BookAuthor" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-md-6">
+                <label asp-for="CourseName">Course Name</label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PurchaseDate">Purchase Date</label>
+                <input asp-for="PurchaseDate" class="form-control" />
+                <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Book Name</th>
+                <th>Book Author</th>
+                <th>Course Name</th>
+                <th>Purchase Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.BookData)
+            {
+                count = count + 1;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.BookName</td>
+                    <td>@item.BookAuthor</td>
+                    <td>@item.CourseName</td>
+                    <td>@item.PurchaseDate</td>
+                    <td><button class="btn"><i class="fa fa-edit"></i></button> | <button class="btn"><i class="fa fa-close"></i></button></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@section Scripts 
+{
+     <partial name="_ValidationScriptsPartial"/>    
+}
+
